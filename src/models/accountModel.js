@@ -6,12 +6,28 @@ export const listAccounts = async () => {
     return accounts
 }
 
-export const getByIdAccount = async (id) => {
-    const account = await prisma.account.findUnique({
-        where: {
-            id
+export const updateAccount = async (account) => {
+    const result = await prisma.account.update({
+        data:account,
+        where:{
+            id:account.id
         }
     })
+    return result
+}
+export const getByIdAccount = async (id) => {
+
+    const account = await prisma.account.findUnique( {where: {id}});
+
     return account
 }
 
+export const create = async (account) => {
+    const result = await prisma.account.create({
+        data: account
+        })
+    return result
+}
+
+
+export const 
