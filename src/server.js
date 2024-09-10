@@ -3,8 +3,10 @@ import authRouter from './routers/authRouter.js'
 import accountRouter from './routers/accountRouter.js'
 import { ENVIRONMENT, PORT, HOST } from './config.js'
 import cors from 'cors';
+import logger from './middlewares/logger.js';
 
 const app = express()
+app.use(logger)
 app.use(express.json());
 app.use(cors({
     origin: '*',
