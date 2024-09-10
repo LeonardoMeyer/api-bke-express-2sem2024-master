@@ -6,25 +6,37 @@ export const listAccounts = async () => {
     return accounts
 }
 
-export const updateAccount = async (account) => {
-    const result = await prisma.account.update({
-        data:account,
-        where:{
-            id:account.id
+export const getByIdAccount = async (id) => {
+    const account = await prisma.account.findUnique({
+        where: {
+            id
         }
     })
-    return result
-}
-export const getByIdAccount = async (id) => {
-
-    const account = await prisma.account.findUnique( {where: {id}});
-
     return account
 }
 
 export const create = async (account) => {
     const result = await prisma.account.create({
         data: account
-        })
+    })
+    return result
+}
+
+export const deleteAccount = async (id) => {
+    const account = await prisma.account.delete({
+        where: {
+            id: id
+        }
+    })
+    return account
+}
+
+export const update = async (account) => {
+    const result = await prisma.account.update({
+        data: account,
+        where:{
+           id: account.id 
+        }
+    })
     return result
 }
