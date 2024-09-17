@@ -1,4 +1,4 @@
-import { listAuth } from "../../models/authModel.js"
+import { listAuth } from "../../models/accountModel.js"
 
 const list = async (req, res) => {
 
