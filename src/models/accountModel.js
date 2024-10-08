@@ -1,6 +1,20 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
+import {z} from 'zod'
 
+const accountSchema = z.object({
+    id: z.number().positive(),
+    service: z.string().min(1).max(255),
+    username: z.string().min(3).max(255),
+    pass: z.string().min(6).max(500),
+    logo_image: z.string().url(11).max(1000).optional(),
+    user_id: z.number()
+})
+
+export const accountValidateToCreate = (account) => {
+    const partialAccountSchema = account.partial({id: true})
+    return partialAccountSchema.safeParse(account)
+}
 // Função para listar todas as contas
 export const listAccounts = async () => {
     try {

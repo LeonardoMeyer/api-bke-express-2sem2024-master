@@ -1,18 +1,31 @@
-import { create } from "../../models/accountModel.js";
+import { accountValidateToCreate, create } from "../../models/accountModel.js"
 
-// Função de criação de conta no controlador
 const createController = async (req, res, next) => {
-    const accountData = req.body;
-    try {
-        const newAccount = await create(accountData); // Usando a função 'create' exportada corretamente
-        return res.status(201).json({
-            success: "Conta criada com sucesso!",
-            account: newAccount
-        });
-    } catch (error) {
-        console.error("Erro ao criar conta:", error);
-        next(error);
-    }
-};
+    try{
+        const account = req.body
 
-export default createController;
+        const accountValidate = accountValidateToCreate(account)
+        console.log(accountValidate)
+
+        const result = await create(account)
+        if(!accountValidate.success)
+        return res.status(401).json({
+            error: "Erro ao criar conta!",
+            fieldErrors: accountValidate.error.flatten().fieldErrors
+        })
+
+        if(!result)
+            return res.status(401).json({
+                error: "Erro ao criar conta!"
+            })
+
+        return res.json({
+            success: "Conta criada com sucesso!",
+            account: result
+        })
+    } catch(error) {
+        next(error)
+    }
+}
+
+export default createController
