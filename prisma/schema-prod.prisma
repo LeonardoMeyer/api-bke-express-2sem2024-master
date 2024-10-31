@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -11,7 +11,7 @@ model account {
   id         Int     @id @default(autoincrement())
   service    String  @db.VarChar(255)
   username   String  @db.VarChar(255)
-  logo_image String? @db.VarChar(700)
+  logo_image String? @db.VarChar(700)   // Padronizado para 700 caracteres para ambos ambientes
   pass       String  @db.VarChar(500)
   user_id    Int
   user       user    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "account_ibfk_1")
@@ -29,6 +29,7 @@ model user {
   account   account[]
   session   session[]
 }
+
 
 model session {
   id         Int      @id @default(autoincrement())

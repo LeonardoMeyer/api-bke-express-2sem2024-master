@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { userValidateToCreate, signUp } from "../../models/userModel.js"
 import { v4 as uuid } from 'uuid'
 import bcrypt from "bcrypt"
@@ -32,10 +31,6 @@ const signup = async (req, res, next) => {
     } catch(error) {
         next(error)
     }
-=======
-const signup = (req, res) => {
-    res.json({message: "Rota de POST Auth/Signup"})
->>>>>>> 294370bd4740f639a45859462a226cec9c9067ad
 }
 
 export default signup
