@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { userValidateToLogin, getByEmail} from "../../models/userModel.js"
 import { createSession } from "../../models/sessionModel.js"
 import jwt from 'jsonwebtoken'
@@ -56,6 +57,10 @@ const login = async (req, res, next) => {
     } catch(error) {
         next(error)
     }
+=======
+const login = (req, res) => {
+    res.json({message: "Rota de POST Auth/Login"})
+>>>>>>> 294370bd4740f639a45859462a226cec9c9067ad
 }
 
 export default login
